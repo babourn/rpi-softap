@@ -6,9 +6,9 @@
 #sudo ip addr flush dev wlan0
 
 echo "Shutting Down Hotspot"
-ip link set dev wlan0 down
-systemctl stop hostapd
-systemctl stop dnsmasq
-ip addr flush dev wlan0
-ip link set dev wlan0 up
-dhcpcd  -n wlan0 >/dev/null 2>&1
+sudo ip link set dev wlan0 down
+sudo systemctl stop hostapd
+sudo systemctl stop dnsmasq
+sudo ip addr flush dev wlan0
+sudo ip link set dev wlan0 up
+sudo dhcpcd  -n wlan0 >/dev/null 2>&1
