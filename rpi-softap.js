@@ -7,7 +7,7 @@ var Tail = require("tail").Tail;
 var wpaTail = new Tail("config/wpa_log");
 wpaTail.unwatch();
 
-var gpio = require("wiring-pi");
+var gpio = require("wiringpi-node");
 var neopixels = require('rpi-ws281x-native');
 
 var child_process = require("child_process");
