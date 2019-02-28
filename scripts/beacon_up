@@ -1,17 +1,25 @@
 #!/bin/bash
 
-# (1) Kill daemons, if running
-sudo killall hostapd
-sudo service udhcpd stop
+## (1) Kill daemons, if running
+#sudo killall hostapd
+#sudo service udhcpd stop
+#
+## (2) Kill the WiFi connection daemon
+#sudo systemctl stop wpa-keepalive.service
+#sudo wpa_cli -i wlan0 terminate
+#
+## (3) Launch the access point
+##sudo service hostapd stop
+#sudo hostapd -B config/hostapd.conf
+#
+## (4) Configure an IPV4 subnet DHCP server
+#sudo ifconfig wlan0 192.168.42.1
+#sudo service udhcpd start
 
-# (2) Kill the WiFi connection daemon
-sudo systemctl stop wpa-keepalive.service
-sudo wpa_cli -i wlan0 terminate
-
-# (3) Launch the access point
-#sudo service hostapd stop
-sudo hostapd -B config/hostapd.conf
-
-# (4) Configure an IPV4 subnet DHCP server
-sudo ifconfig wlan0 192.168.42.1
-sudo service udhcpd start
+echo "Creating Hotspot"
+ip link set dev wlan0 down
+ip a add 10.0.0.5/24 brd + dev wlan0
+ip link set dev wlan0 up
+dhcpcd -k wlan0 >/dev/null 2>&1
+systemctl start dnsmasq
+systemctl start hostapd

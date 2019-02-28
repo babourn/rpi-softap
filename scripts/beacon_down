@@ -1,6 +1,14 @@
 #!/bin/bash
 
-# (1) Ensure all SoftAP related services are terminated
-sudo service udhcpd stop
-sudo killall hostapd
-sudo ip addr flush dev wlan0
+## (1) Ensure all SoftAP related services are terminated
+#sudo service udhcpd stop
+#sudo killall hostapd
+#sudo ip addr flush dev wlan0
+
+echo "Shutting Down Hotspot"
+ip link set dev wlan0 down
+systemctl stop hostapd
+systemctl stop dnsmasq
+ip addr flush dev wlan0
+ip link set dev wlan0 up
+dhcpcd  -n wlan0 >/dev/null 2>&1
