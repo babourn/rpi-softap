@@ -266,7 +266,7 @@ eventEmitter.on('setup_1', function() {
 
 // (2) Start SoftAP Server
 eventEmitter.on('setup_2', function() {
-  server.listen(settings.server.port, "192.168.42.1");
+  server.listen(settings.server.port, "10.0.0.5");
   eventEmitter.emit("neo", "breathe", rgb2Int(0, 0, 255));
   console.log('[SoftAP]:\tServer listening at http://192.168.42.1:'+settings.server.port+'.');
   // Note: The server will call setup_3 when the user has completed configuration.
