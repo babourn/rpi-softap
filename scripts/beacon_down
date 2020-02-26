@@ -5,7 +5,7 @@
 #sudo killall hostapd
 #sudo ip addr flush dev wlan0
 
-echo "Shutting Down Hotspot"
+#echo "Shutting Down Hotspot"
 sudo ip link set dev wlan0 down
 sudo systemctl stop hostapd
 sudo systemctl stop dnsmasq
